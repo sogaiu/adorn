@@ -1,0 +1,59 @@
+= Adorn Helper Program and Friends
+
+This project is an experiment in testing the feasibility of providing additional functionality to various Clojure-supporting editors without adding to existing Clojure tooling (e.g. Cider, Chlorine, Calva, etc.) and further provide a path for such existing tooling to spin out some of their functionality.
+
+Note that the primary purpose of this repository is a demonstration of HOW some functionality might be provided and not necessarily WHAT.
+
+== Rationale
+
+Some existing Clojure-supporting editor tooling seem to struggle with accumulating additional features.  On the one hand it's convenient to have many features built-in, on the other hand, this can make maintenance, extension, and learning of the existing code bases increasingly difficult as more functionality is added over time.
+
+Recent developments such as https://www.graalvm.org/docs/reference-manual/aot-compilation/[GraalVM Native Image], https://github.com/anmonteiro/lumo[Lumo], and https://openjdk.java.net/jeps/295[jaotc] might offer the possibility of providing quick-to-launch external programs that can provide some Clojure-related manipulation independent of other tooling.
+
+In the Clojure spirit of à la carte and decomplecting, perhaps it's practical for some functionality (e.g. some types of refactoring) to live separated from other functionality (e.g. jump-to-defintion based on static analysis).  (Note that REPL-dependent functionality is not currently being considered.)
+
+== Architecture
+
+The basic idea is to implement most of the desired functionality in an external Clojure program, called a "helper", and then have a thin wrapper (per supported editor) that communicates with this helper.
+
+This should enable simpler editor-specific implementations, allow the external Clojure program to manipulate and execute Clojure code, as well as reduce the amount of code one might otherwise need to reimplement within each editor-specific implementation.
+
+== Prerequisites
+
+* Some Java (using >= 8 here)
+* https://www.graalvm.org/docs/reference-manual/aot-compilation/#install-native-image[Native Image] (implies appropriate https://github.com/oracle/graal[GraalVM] >= 19)
+* Clojure 1.9 and its clj tool
+* Atom, Emacs, or VSCode
+
+== Building and Setup
+
+* Clone this repository and cd to the clone
+
+* Ensure native-image is on your PATH -OR- +
+  Set GRAALVM_HOME appropriately (e.g. on Arch Linux this might be /usr/lib/jvm/java-8-graal)
+
+* Build the helper: `clj -A:native-image`.  After some time, this should produce a file named "adorn" in the current directory.
+
+* Examine the atom / emacs / vscode subdirectory and follow the contained instructions for getting the Atom plugin / Emacs package / VSCode extension to work
+
+== Technical Details
+
+Initially, the helper will be created using Native Image.  Note that Native Image appears to have a variety of https://github.com/oracle/graal/blob/master/substratevm/LIMITATIONS.md[limitations] so it might be worth trying Lumo and/or jaotc at some point.
+
+Communication between a wrapper and the helper could be done in a variety of ways, but the initial choice is to talk via STDIN / STDOUT and exchange JSON RPC strings.  (EDN was also considered, but support for generating it appeared to be weak in at least one commonly used editor.)
+
+The first editors chosen for support are Atom, Emacs, and VSCode.  (It should be fairly straight-forward to create a wrapper for any editor that can read / write JSON and work with external processes.)
+
+== Acknowledgments
+
+Thanks to (at least) the following folks:
+
+* borkdude
+* lread
+* mauricioszabo
+* rundis
+* Saikyun
+* seancorfield
+* taylorwood
+* thheller
+* xsc

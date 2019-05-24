@@ -1,0 +1,45 @@
+{
+ :deps
+ {
+   augistints
+   {
+     :git/url "https://github.com/sogaiu/augistints.git"
+     :sha "debd2d647575074b1ea6dd26937f403e4a8036d2"
+   }
+   ;; XXX: 1.10.0 may have problems
+   org.clojure/clojure {:mvn/version "1.9.0"}
+   org.clojure/data.json {:mvn/version "0.2.6"}
+   ;; XXX: workaround for deps.edn processing problem?
+   rewrite-clj
+   {
+     :git/url "https://github.com/sogaiu/rewrite-clj.git"
+     :sha "3bf6023adf43338e3c8437ca78d859dca7d68ec0"
+   }
+ }
+
+ :aliases
+ {
+   :native-image
+   {
+     :main-opts
+     [
+       "-m clj.native-image script"
+       "--no-fallback"
+       "-H:Name=adorn"
+       "-H:+ReportExceptionStackTraces"
+       "--report-unsupported-elements-at-runtime"
+       "-J-Dclojure.compiler.direct-linking=true"
+       "--initialize-at-build-time"
+       "--verbose"
+     ]
+     :extra-deps
+     {
+       clj.native-image
+       {
+         :git/url "https://github.com/taylorwood/clj.native-image.git"
+         :sha "f27bf5ed1c03bb25715be47c9365d39cdcee7c41"
+       }
+     }
+   }
+ }
+}

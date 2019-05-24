@@ -1,0 +1,50 @@
+= Adorn VSCode Extension
+
+== Prerequisites
+
+* Adorn command line program built
+* VSCode
+* yarn (or npm)
+* A sacrificial / backed-up Clojure project directory
+
+== Building
+
+* In some terminal:
+
+----
+# install dependencies
+yarn
+# build + watch for changes
+yarn shadow-cljs watch dev 
+----
+
+If all went well, there should now be a fresh file at lib/main.js (the "compiled" extension).
+
+* In the bin subdirectory, make a copy of the adorn binary, or create a symlink to it.
+
+== Starting
+
+* Start VSCode
+
+* Open the folder containing this file in VSCode.
+
+* From the menu bar, choose Debug -> Start Debugging (or press F5).  This should result in another VSCode window opening.
+
+* In the new VSCode window, open a folder that has at least one Clojure file in it.
+
+== Invoking
+
+* Open a Clojure file in an editor pane and move the cursor to somewhere within a defn form.
+
+* Bring up the https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette[command palette], look for / start typing "Inline Def", and once found / selected, press Enter / Return.
+
+* This should result in an https://blog.michielborkent.nl/2017/05/25/inline-def-debugging/[Inline Def] transformation being applied to the defn.
+
+== Notes
+
+* Using more than one shadow-cljs-based VSCode extension that is not compiled for release is likely to lead to problems.  To build for release:
+
+----
+yarn shadow-cljs release dev
+----
+
