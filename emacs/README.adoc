@@ -1,0 +1,31 @@
+= Adorn Emacs Package
+
+== Prerequisites
+
+* Adorn command line program built
+* Emacs (>= 25.2)
+* A sacrificial / backed-up Clojure file
+
+== Setup
+
+* Put the directory containing this file somewhere so that the contained adorn.el file ends up on your load-path.
+
+* In the bin subdirectory, make a copy of the adorn binary, or create a symlink to it.
+
+* In your equivalent of .emacs, add `(require 'adorn)`.
+
+Note that it's important for adorn.el and the bin subdirectory (with its content) to end up in the same directory.
+
+== Starting
+
+* Start Emacs
+
+* Open a Clojure file with at least one defn or defn- in it.
+
+== Invoking
+
+* Move point to somewhere within a defn or defn- form.
+
+* M-x adorn-inline-def <RET>
+
+* This should result in an https://blog.michielborkent.nl/2017/05/25/inline-def-debugging/[Inline Def] transformation being applied to the defn.
