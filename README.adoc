@@ -23,7 +23,7 @@ This should enable simpler editor-specific implementations, allow the external C
 * Some Java (using >= 8 here)
 * https://www.graalvm.org/docs/reference-manual/aot-compilation/#install-native-image[Native Image] (implies appropriate https://github.com/oracle/graal[GraalVM] >= 19)
 * Clojure 1.9 and its clj tool
-* Atom, Emacs, or VSCode
+* Atom or VSCode
 
 == Building and Setup
 
@@ -34,7 +34,7 @@ This should enable simpler editor-specific implementations, allow the external C
 
 * Build the helper: `clj -A:native-image`.  After some time, this should produce a file named "adorn" in the current directory.
 
-* Examine the atom / emacs / vscode subdirectory and follow the contained instructions for getting the Atom plugin / Emacs package / VSCode extension to work
+* Examine the atom / vscode subdirectory and follow the contained instructions for getting the Atom plugin / VSCode extension to work
 
 == Technical Details
 

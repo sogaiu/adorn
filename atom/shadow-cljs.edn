@@ -1,0 +1,20 @@
+;; shadow-cljs configuration
+{:source-paths [
+                "lib"
+                "src"
+               ]
+ ;;
+ :dependencies []
+ ;;
+ :builds
+ {:dev {:target :node-library
+        ;;
+        :compiler-options {:infer-externs :auto}
+        :exports {
+                  :activate adorn.core/activate
+                  :deactivate adorn.core/deactivate
+                 }
+        ;;
+        :output-dir "lib/js"
+        :output-to "lib/main.js"
+        :devtools {:before-load-async adorn.core/before}}}}

@@ -1,0 +1,39 @@
+= Adorn Atom Plugin
+
+== Prerequisites
+
+* Adorn command line program built
+* Atom
+* yarn (or npm)
+* A sacrificial / backed-up Clojure project directory
+
+== Building
+
+* In some terminal:
+
+----
+# install dependencies
+yarn
+# build + watch for changes
+yarn shadow-cljs watch dev 
+----
+
+If all went well, there should now be a fresh file at lib/main.js (the "compiled" plugin).
+
+* In the bin subdirectory, make a copy of the adorn binary, or create a symlink to it.
+
+== Starting
+
+* Symlink the directory containing this file under ~/.atom/packages/
+
+* Start Atom
+
+* Open a folder that has at least one Clojure file in it.
+
+== Invoking
+
+* Open a Clojure file in an editor pane and move the cursor to somewhere within a defn form.
+
+* Bring up the https://flight-manual.atom.io/getting-started/sections/atom-basics/#command-palette[command palette], look for / start typing "Inline Def", and once found / selected, press Enter / Return.
+
+* This should result in an https://blog.michielborkent.nl/2017/05/25/inline-def-debugging/[Inline Def] transformation being applied to the defn.
