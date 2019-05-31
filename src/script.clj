@@ -38,8 +38,8 @@
         [new-text new-range]
         (if defn-zloc
            [(-> (rz/string defn-zloc)
-                ;; XXX: consider prepending metadata for removal-detection?
-                (ac/prepend-to-defn-body ac/inline-def-gen)
+                (ac/prepend-to-defn-body (ac/make-inline-def-with-meta-gen
+                                          {:adorn/inlinedef true}))
                 ac/cljfmt)
             (rz/position-span defn-zloc)]
            [nil nil])]
