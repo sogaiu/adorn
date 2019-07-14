@@ -48,3 +48,4 @@ If all went well, there should now be a fresh file at lib/main.js (the "compiled
 yarn shadow-cljs release dev
 ----
 
+* Another command provided is "Tap Arguments".  This should modify a defn form so that its arguments are logged via tap>.
