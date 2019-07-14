@@ -37,12 +37,23 @@
         defn-zloc (find-defn-zloc-at text row col)
         [new-text new-range]
         (if defn-zloc
-           [(-> (rz/string defn-zloc)
-                (ac/prepend-to-defn-body (ac/make-inline-def-with-meta-gen
-                                          {:adorn/inlinedef true}))
-                ac/cljfmt)
-            (rz/position-span defn-zloc)]
-           [nil nil])]
+          (cond
+            (= method "inlinedef")
+            [(-> (rz/string defn-zloc)
+                 (ac/prepend-to-defn-body (ac/make-inline-def-with-meta-gen
+                                           {:adorn/inlinedef true}))
+                 ac/cljfmt)
+             (rz/position-span defn-zloc)]
+            ;;
+            (= method "tapargs")
+            [(-> (rz/string defn-zloc)
+                 (ac/prepend-to-defn-body ac/log-defn-args-gen)
+                 ac/cljfmt)
+             (rz/position-span defn-zloc)]
+            ;;
+            :else
+            [nil nil])
+          [nil nil])]
     ;; XXX: check for errors?
     (-> (assoc {"jsonrpc" "2.0", "id" id}
                 "result" [new-text new-range])
@@ -53,5 +64,9 @@
 
 (comment
 
-  ;;{"jsonrpc": "2.0", "method": "inlinedef", "params": ["(defn my-fn [a] (+ a 1))" 3 4], "id": 1}
+  ;; try feeding the following via stdin
+
+  ;;{"jsonrpc": "2.0", "method": "inlinedef", "params": ["(defn my-fn [a] (+ a 1))", 1, 1], "id": 1}
+
+  ;;{"jsonrpc": "2.0", "method": "tapargs", "params": ["(defn my-fn [a] (+ a 1))", 1, 1], "id": 1}
   )
