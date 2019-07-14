@@ -13,7 +13,8 @@
   ],
   "activationEvents": [
     "onLanguage:clojure",
-    "onCommand:adorn.inlinedef"
+    "onCommand:adorn.inlinedef",
+    "onCommand:adorn.tapargs"
   ],
   "main": "./lib/main",
   "contributes": {
@@ -21,6 +22,10 @@
       {
         "command": "adorn.inlinedef",
         "title": "Inline Def"
+      },
+      {
+        "command": "adorn.tapargs",
+        "title": "Tap Arguments"
       }
     ]
   },

@@ -10,8 +10,8 @@
   (str (av/extension-path "undefined_publisher.vscode-adorn")
      "/bin/adorn"))
 
-(defn inlinedef
-  [^js editor]
+(defn adorn-defn
+  [^js editor fn-name]
   (av/info-message "invoking helper...")
   (let [p (.spawn ncp (adorn-path) #js [] #js {})
         stdout (.-stdout p)
@@ -44,17 +44,30 @@
         (println (str "err: " err))))
     ;; sending to helper
     (.end stdin
-      (aj/to-str "inlinedef"
+      (aj/to-str fn-name
         ;; buffer text, helper counts from 1 for both row and column values
         [(av/current-buffer) (inc (av/current-row)) (inc (av/current-col))]))))
+
+(defn inlinedef
+  [^js editor]
+  (adorn-defn editor "inlinedef"))
+
+(defn tapargs
+  [^js editor]
+  (adorn-defn editor "tapargs"))
 
 (defn activate
   [context]
   (.log js/console "activate called")
-  (let [disposable (av/register-text-editor-command!
-                     "adorn.inlinedef"
-                     #'inlinedef)]
-    (av/push-subscription! context disposable)))
+  (let [disp-1 (av/register-text-editor-command!
+                "adorn.inlinedef"
+                #'inlinedef)
+        _ (av/push-subscription! context disp-1)
+        disp-2 (av/register-text-editor-command!
+                "adorn.tapargs"
+                #'tapargs)
+        _ (av/push-subscription! context disp-2)]
+    true))
 
 (defn deactivate
   [])
