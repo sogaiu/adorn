@@ -4,7 +4,7 @@
 
 * Adorn command line program built
 * VSCode
-* yarn (or npm)
+* npm
 * A sacrificial / backed-up Clojure project directory
 
 == Building
@@ -13,9 +13,9 @@
 
 ----
 # install dependencies
-yarn
+npm install
 # build + watch for changes
-yarn shadow-cljs watch dev 
+npx shadow-cljs watch dev
 ----
 
 If all went well, there should now be a fresh file at lib/main.js (the "compiled" extension).
@@ -45,7 +45,7 @@ If all went well, there should now be a fresh file at lib/main.js (the "compiled
 * Using more than one shadow-cljs-based VSCode extension that is not compiled for release is likely to lead to problems.  To build for release:
 
 ----
-yarn shadow-cljs release dev
+npx shadow-cljs release dev
 ----
 
 * Another command provided is "Tap Arguments".  This should modify a defn form so that its arguments are logged via tap>.

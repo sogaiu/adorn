@@ -7,7 +7,7 @@ yarn
 yarn shadow-cljs watch dev
 ```
 
-This will start up a compiler for ClojureScript.  Symlinking this directory under `~/.atom/packages/` is convenient for development.
+This will start up a compiler for ClojureScript.  Symlinking this directory under `~/.atom/packages/` is convenient for development.  The symlink may need to be named "adorn".
 
 Please note that Adorn activates via its "inline-def" command.
 

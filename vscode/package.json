@@ -33,11 +33,9 @@
     "postinstall": "node ./node_modules/vscode/bin/install"
   },
   "devDependencies": {
-    "shadow-cljs": "^2.8.29",
+    "shadow-cljs": "^2.8.93",
+    "minimist": ">=1.2.2",
     "source-map-support": "^0.5.9",
     "vscode": "^1.1.22"
-  },
-  "dependencies": {
-    "diff": "^3.5.0"
   }
 }
