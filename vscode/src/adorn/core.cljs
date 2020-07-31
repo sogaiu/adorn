@@ -7,7 +7,7 @@
 (defn adorn-path
   []
   ;; XXX: modify if publisher / name changes in package.json
-  (str (av/extension-path "undefined_publisher.vscode-adorn")
+  (str (av/extension-path "sogaiu.vscode-adorn")
      "/bin/adorn"))
 
 (defn adorn-defn

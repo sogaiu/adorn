@@ -3,7 +3,7 @@
   "displayName": "vscode-adorn",
   "description": "",
   "version": "0.0.1",
-  "publisher": "",
+  "publisher": "sogaiu",
   "license": "",
   "engines": {
     "vscode": "^1.34.0"
